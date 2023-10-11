@@ -6,16 +6,19 @@ import {
   checkAnalysisStatus,
   startAnalysis,
 } from "../api/analysis.api";
+import { useNavigate } from "react-router-dom";
 
 const StartAnalysisScreen = ({
-  analysis,
   setAnalysis,
 }: {
-  analysis: ArticleAnalysis | null,
   setAnalysis: (analysis: ArticleAnalysis) => void;
 }) => {
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
-  const [progressData, setProgressData] = useState<{ status: string; progress: number }>({ status: "Initializing", progress: 0 });
+  const [progressData, setProgressData] = useState<{
+    status: string;
+    progress: number;
+  }>({ status: "Initializing", progress: 0 });
 
   useEffect(() => {
     const processId = localStorage.getItem("process_id");
@@ -29,6 +32,8 @@ const StartAnalysisScreen = ({
               clearInterval(intervalId);
 
               setAnalysis(statusData.result);
+
+              navigate("/");
             } else {
               console.log("Analysis status:", statusData.status);
               setProgressData(statusData);
@@ -39,14 +44,16 @@ const StartAnalysisScreen = ({
           });
       }, 1000);
     }
-  }, [isLoading]);
+  }, [isLoading, setAnalysis, navigate]);
 
   useEffect(() => {
     setProgressData({ status: "Initializing", progress: 0 });
     setIsLoading(true);
 
-    const link = window.location.href;
-
+    // TODO: for testing purposes ONLY, need to replace!!
+    // const link = window.location.href;
+    const link = "https://www.cnn.com/2023/10/10/middleeast/israel-incursion-gaza-analysis-wedeman-intl/index.html";
+    
     startAnalysis(link)
       .then((startData) => {
         localStorage.setItem("process_id", startData.process_id);
