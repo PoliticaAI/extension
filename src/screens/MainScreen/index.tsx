@@ -17,28 +17,41 @@ const MainScreen = ({ analysis }: { analysis: ArticleAnalysis | null }) => {
 
   useEffect(() => {
     if (!analysis) navigate("/start");
+
+    console.log(analysis);
   }, [analysis, navigate]);
 
   return (
     analysis && (
       <div className="flex h-full flex-col">
+        <div className="p-2 bg-slate-200">
+          <Typography
+            variant="h5"
+            fontWeight={400}
+            component="div"
+            className="text-blue-600 flex-1"
+          >
+            Political Spectrum
+          </Typography>
+        </div>
+
         <Tabs value={tab} onChange={(_e, newTab) => setTab(newTab)}>
           <Tab
             icon={<FactCheckIcon />}
             label={<Typography className="text-xs">Bias</Typography>}
-            className="grow"
+            className="grow mb-2"
           />
           <Tab
             icon={<ArticleIcon />}
             label={
               <Typography className="text-xs">Similar Articles</Typography>
             }
-            className="grow"
+            className="grow mb-2"
           />
           <Tab
             icon={<PlagiarismIcon />}
             label={<Typography className="text-xs">Fallacies</Typography>}
-            className="grow"
+            className="grow mb-2"
           />
         </Tabs>
 
