@@ -5,6 +5,7 @@ export interface ArticleAnalysis {
     href: string;
     thumb: string;
     title: string;
+    desc: string;
   }[];
   gpt_response: {
     fallacies: Record<string, string>;

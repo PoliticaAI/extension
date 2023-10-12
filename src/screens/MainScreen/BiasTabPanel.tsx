@@ -34,10 +34,10 @@ const BiasTabPanel = ({ analysis }: { analysis: ArticleAnalysis }) => {
       {...Object.entries(analysis.gpt_response.reasons).map(
         ([summary, desc]) => (
           <Accordion className="mb-4">
-            <AccordionSummary expandIcon={<ExpandMoreIcon />} className="bg-slate-100">
+            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
               {summary}
             </AccordionSummary>
-            <AccordionDetails className="border-0 border-t-[1px] border-slate-400 border-solid">{desc}</AccordionDetails>
+            <AccordionDetails>{desc}</AccordionDetails>
           </Accordion>
         )
       )}

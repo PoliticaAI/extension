@@ -31,6 +31,7 @@ const StartAnalysisScreen = ({
               setIsLoading(false);
               clearInterval(intervalId);
 
+              console.log(statusData.result);
               setAnalysis(statusData.result);
 
               navigate("/");

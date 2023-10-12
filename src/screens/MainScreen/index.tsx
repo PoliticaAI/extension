@@ -19,23 +19,36 @@ const MainScreen = ({ analysis }: { analysis: ArticleAnalysis | null }) => {
     if (!analysis) navigate("/start");
   }, [analysis, navigate]);
 
-  // suppress typescript error - this should automatically happen in useEffect
-  analysis = analysis as ArticleAnalysis;
-
   return (
-    <div className="flex h-full flex-col">
-      <Tabs value={tab} onChange={(_e, newTab) => setTab(newTab)}>
-        <Tab icon={<FactCheckIcon />} label="Bias" className="grow" />
-        <Tab icon={<ArticleIcon />} label="Similar Articles" className="grow" />
-        <Tab icon={<PlagiarismIcon />} label="Fallacies" className="grow" />
-      </Tabs>
+    analysis && (
+      <div className="flex h-full flex-col">
+        <Tabs value={tab} onChange={(_e, newTab) => setTab(newTab)}>
+          <Tab
+            icon={<FactCheckIcon />}
+            label={<Typography className="text-xs">Bias</Typography>}
+            className="grow"
+          />
+          <Tab
+            icon={<ArticleIcon />}
+            label={
+              <Typography className="text-xs">Similar Articles</Typography>
+            }
+            className="grow"
+          />
+          <Tab
+            icon={<PlagiarismIcon />}
+            label={<Typography className="text-xs">Fallacies</Typography>}
+            className="grow"
+          />
+        </Tabs>
 
-      <div className="h-full overflow-auto p-1">
-        {tab === 0 && <BiasTabPanel analysis={analysis} />}
-        {tab === 1 && <SimilarArticleTabPanel analysis={analysis} />}
-        {tab === 2 && <FallaciesTabPanel analysis={analysis} />}
+        <div className="h-full overflow-auto p-1">
+          {tab === 0 && <BiasTabPanel analysis={analysis} />}
+          {tab === 1 && <SimilarArticleTabPanel analysis={analysis} />}
+          {tab === 2 && <FallaciesTabPanel analysis={analysis} />}
+        </div>
       </div>
-    </div>
+    )
   );
 };
 
