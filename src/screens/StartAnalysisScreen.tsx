@@ -6,7 +6,7 @@ import {
   checkAnalysisStatus,
   startAnalysis,
 } from "../api/analysis.api";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 const StartAnalysisScreen = ({
   setAnalysis,
@@ -19,6 +19,8 @@ const StartAnalysisScreen = ({
     status: string;
     progress: number;
   }>({ status: "Initializing", progress: 0 });
+
+  const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
     const processId = localStorage.getItem("process_id");
@@ -51,10 +53,8 @@ const StartAnalysisScreen = ({
     setProgressData({ status: "Initializing", progress: 0 });
     setIsLoading(true);
 
-    // TODO: for testing purposes ONLY, need to replace!!
-    // const link = window.location.href;
-    const link = "https://www.cnn.com/2023/10/10/middleeast/israel-incursion-gaza-analysis-wedeman-intl/index.html";
-    
+    const link = searchParams.get("href") || window.location.href;
+
     startAnalysis(link)
       .then((startData) => {
         localStorage.setItem("process_id", startData.process_id);
@@ -66,11 +66,14 @@ const StartAnalysisScreen = ({
   }, []);
 
   return (
-    <div className="w-full h-full flex flex-col justify-center items-center space-y-6">
-      <Typography variant="h1" color="primary" className="text-2xl font-bold">
+    <div className="w-full h-full flex flex-col justify-center items-center">
+      <Typography variant="h1" color="primary" className="text-2xl font-bold mb-2">
         Analyzing article...
       </Typography>
-      <CircularProgress />
+      <Typography variant="h2" className="text-sm text-slate-500 mb-6">
+        {searchParams.get("href") || window.location.href}
+      </Typography>
+      <CircularProgress className="mb-6" />
       <Typography className="text-sm text-slate-600">
         {progressData.status} ({progressData.progress}/4)
       </Typography>

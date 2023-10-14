@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { ArticleAnalysis } from "../../api/analysis.api";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 import { Tab, Tabs, Typography } from "@mui/material";
 
@@ -16,6 +16,11 @@ const MainScreen = ({ analysis }: { analysis: ArticleAnalysis | null }) => {
   const [tab, setTab] = useState(0);
 
   useEffect(() => {
+    const params = new URLSearchParams(
+      new URL(window.location.href).searchParams
+    );
+
+    if (params.has("embedded")) navigate("/ask");
     if (!analysis) navigate("/start");
 
     console.log(analysis);

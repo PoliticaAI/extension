@@ -5,6 +5,7 @@ import MainScreen from "./screens/MainScreen";
 import StartAnalysisScreen from "./screens/StartAnalysisScreen";
 
 import { MemoryRouter, Routes, Route } from "react-router-dom";
+import AskAnalysisScreen from "./screens/AskAnalysisScreen";
 
 const App = () => {
   // TODO: THIS IS FOR TESTING PURPOSES ONLY
@@ -200,6 +201,7 @@ const App = () => {
           path="/start"
           element={<StartAnalysisScreen setAnalysis={setAnalysis} />}
         />
+        <Route path="/ask" element={<AskAnalysisScreen />} />
       </Routes>
     </MemoryRouter>
   );
