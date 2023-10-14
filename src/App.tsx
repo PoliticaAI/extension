@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ArticleAnalysis } from "./api/analysis.api";
 
 import MainScreen from "./screens/MainScreen";
@@ -192,6 +192,23 @@ const App = () => {
         "https://media.cnn.com/api/v1/images/stellar/prod/231010130853-02-gaza-damaged-buildings-10102023.jpg?c=16x9&q=w_800,c_fill",
     },
   });
+
+  useEffect(() => {
+    const params = new URLSearchParams(
+      new URL(window.location.href).searchParams
+    );
+
+    // Allow embedded to get bigger = fit bigger screens
+    if (params.has("embedded")) {
+      document.body.style.width = document.body.style.height = "100%";
+
+      (document.body.parentElement as HTMLElement).style.width = 
+        (document.body.parentElement as HTMLElement).style.height = "100%";
+
+      (document.getElementById("root") as HTMLElement).style.width = 
+        (document.getElementById("root") as HTMLElement).style.height = "100%";
+    }
+  }, []);
 
   return (
     <MemoryRouter>

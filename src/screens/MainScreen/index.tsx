@@ -20,7 +20,7 @@ const MainScreen = ({ analysis }: { analysis: ArticleAnalysis | null }) => {
       new URL(window.location.href).searchParams
     );
 
-    if (params.has("embedded")) navigate("/ask");
+    if (params.has("embedded") && !analysis) navigate("/ask");
     if (!analysis) navigate("/start");
 
     console.log(analysis);

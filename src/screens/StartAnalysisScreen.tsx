@@ -67,10 +67,10 @@ const StartAnalysisScreen = ({
 
   return (
     <div className="w-full h-full flex flex-col justify-center items-center">
-      <Typography variant="h1" color="primary" className="text-2xl font-bold mb-2">
+      <Typography variant="h1" color="primary" className="text-2xl font-bold mb-4">
         Analyzing article...
       </Typography>
-      <Typography variant="h2" className="text-sm text-slate-500 mb-6">
+      <Typography variant="h2" className="text-sm text-slate-500 mb-6 px-4 text-center">
         {searchParams.get("href") || window.location.href}
       </Typography>
       <CircularProgress className="mb-6" />
