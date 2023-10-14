@@ -1,15 +1,13 @@
 import { TextField, Typography, Button } from "@mui/material";
 import { useState } from "react";
 import isLink from "../util/isLink";
-import { useNavigate } from "react-router-dom";
-import { useTheme } from "@mui/material/styles";
-import ErrorIcon from '@mui/icons-material/Error';
+import { useNavigate, useSearchParams } from "react-router-dom";
+import ErrorIcon from "@mui/icons-material/Error";
 
 const AskAnalysisScreen = () => {
   const [link, setLink] = useState<string>("");
   const [errorText, setErrorText] = useState<null | string>(null);
 
-  const theme = useTheme();
   const navigate = useNavigate();
 
   const analyze = () => {
@@ -43,7 +41,7 @@ const AskAnalysisScreen = () => {
       {errorText && (
         <Typography
           className="-mt-4 mb-6 text-xs text-left w-60 flex items-center"
-          sx={{color: "error.main"}}
+          sx={{ color: "error.main" }}
         >
           <ErrorIcon className="w-4 mr-1" />
           {errorText}

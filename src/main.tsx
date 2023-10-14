@@ -10,6 +10,12 @@ import { ThemeProvider } from "@emotion/react";
 const rootElement = document.getElementById("root")!;
 
 const theme = createTheme({
+  palette: {
+    primary: {
+      main: "rgb(59 130 246)",
+      contrastText: "white",
+    },
+  },
   components: {
     MuiPopover: {
       defaultProps: {

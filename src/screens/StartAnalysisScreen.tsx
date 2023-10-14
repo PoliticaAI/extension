@@ -21,6 +21,7 @@ const StartAnalysisScreen = ({
   }>({ status: "Initializing", progress: 0 });
 
   const [searchParams, setSearchParams] = useSearchParams();
+  const link = searchParams.get("href") || window.location.href;
 
   useEffect(() => {
     const processId = localStorage.getItem("process_id");
@@ -36,7 +37,7 @@ const StartAnalysisScreen = ({
               console.log(statusData.result);
               setAnalysis(statusData.result);
 
-              navigate("/");
+              navigate(`/?href=${link}`);
             } else {
               console.log("Analysis status:", statusData.status);
               setProgressData(statusData);
@@ -53,8 +54,6 @@ const StartAnalysisScreen = ({
     setProgressData({ status: "Initializing", progress: 0 });
     setIsLoading(true);
 
-    const link = searchParams.get("href") || window.location.href;
-
     startAnalysis(link)
       .then((startData) => {
         localStorage.setItem("process_id", startData.process_id);
@@ -67,11 +66,18 @@ const StartAnalysisScreen = ({
 
   return (
     <div className="w-full h-full flex flex-col justify-center items-center">
-      <Typography variant="h1" color="primary" className="text-2xl font-bold mb-4">
+      <Typography
+        variant="h1"
+        color="primary"
+        className="text-2xl font-bold mb-4"
+      >
         Analyzing article...
       </Typography>
-      <Typography variant="h2" className="text-sm text-slate-500 mb-6 px-4 text-center">
-        {searchParams.get("href") || window.location.href}
+      <Typography
+        variant="h2"
+        className="text-sm text-slate-500 mb-6 px-4 text-center"
+      >
+        {link}
       </Typography>
       <CircularProgress className="mb-6" />
       <Typography className="text-sm text-slate-600">

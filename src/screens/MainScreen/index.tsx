@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { ArticleAnalysis } from "../../api/analysis.api";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
-import { Tab, Tabs, Typography } from "@mui/material";
+import { Tab, Tabs, Typography, IconButton } from "@mui/material";
 
 import FactCheckIcon from "@mui/icons-material/FactCheck";
 import ArticleIcon from "@mui/icons-material/Article";
@@ -10,17 +10,25 @@ import PlagiarismIcon from "@mui/icons-material/Plagiarism";
 import BiasTabPanel from "./BiasTabPanel";
 import SimilarArticleTabPanel from "./SimilarArticleTabPanel";
 import FallaciesTabPanel from "./FallaciesTabPanel";
+import ReplayIcon from "@mui/icons-material/Replay";
 
 const MainScreen = ({ analysis }: { analysis: ArticleAnalysis | null }) => {
   const navigate = useNavigate();
   const [tab, setTab] = useState(0);
+
+  const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
     const params = new URLSearchParams(
       new URL(window.location.href).searchParams
     );
 
-    if (params.has("embedded") && !analysis) navigate("/ask");
+    if (params.has("embedded") && !analysis) {
+      console.log("embedded!");
+      navigate("/ask");
+      return;
+    }
+
     if (!analysis) navigate("/start");
 
     console.log(analysis);
@@ -29,7 +37,7 @@ const MainScreen = ({ analysis }: { analysis: ArticleAnalysis | null }) => {
   return (
     analysis && (
       <div className="flex h-full flex-col">
-        <div className="p-2 bg-slate-200">
+        <div className="px-3 py-1.5 bg-slate-200 flex items-center">
           <Typography
             variant="h5"
             fontWeight={400}
@@ -38,6 +46,12 @@ const MainScreen = ({ analysis }: { analysis: ArticleAnalysis | null }) => {
           >
             Political Spectrum
           </Typography>
+
+          <IconButton
+            onClick={() => navigate(`/start?href=${searchParams.get("href")}`)}
+          >
+            <ReplayIcon />
+          </IconButton>
         </div>
 
         <Tabs value={tab} onChange={(_e, newTab) => setTab(newTab)}>

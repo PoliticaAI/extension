@@ -19,12 +19,14 @@ const SimilarArticleTabPanel = ({
             <Link
               href={article.href}
               className="decoration-transparent text-black line-clamp-2"
+              target="_blank"
             >
               {article.title}
             </Link>
             <Link
               href={article.href}
               className="decoration-transparent text-green-800 text-xs line-clamp-1 mb-2"
+              target="_blank"
             >
               {article.href}
             </Link>
