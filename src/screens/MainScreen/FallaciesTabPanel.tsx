@@ -18,9 +18,11 @@ const FallaciesTabPanel = ({ analysis }: { analysis: ArticleAnalysis }) => {
         ([summary, desc]) => (
           <Accordion className="mb-4">
             <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-              {summary}
+              <Typography>{summary}</Typography>
             </AccordionSummary>
-            <AccordionDetails>{desc}</AccordionDetails>
+            <AccordionDetails className="border-0 border-t-[1px] border-solid border-slate-500">
+              <Typography>{desc}</Typography>
+            </AccordionDetails>
           </Accordion>
         )
       )}

@@ -21,9 +21,19 @@ const StartAnalysisScreen = ({
   }>({ status: "Initializing", progress: 0 });
 
   const [searchParams, setSearchParams] = useSearchParams();
-  const link = searchParams.get("href") || window.location.href;
+  const [link, setLink] = useState<null | string>(null);
 
   useEffect(() => {
+    (async () => {
+      setLink(
+        searchParams.get("href") ||
+          (await chrome.tabs.query({ active: true, lastFocusedWindow: true }))[0].url
+      );
+    })();
+  }, [searchParams]);
+
+  useEffect(() => {
+    if (!link) return;
     const processId = localStorage.getItem("process_id");
 
     if (processId && isLoading) {
@@ -48,9 +58,11 @@ const StartAnalysisScreen = ({
           });
       }, 1000);
     }
-  }, [isLoading, setAnalysis, navigate]);
+  }, [isLoading, setAnalysis, navigate, link]);
 
   useEffect(() => {
+    if (!link) return;
+
     setProgressData({ status: "Initializing", progress: 0 });
     setIsLoading(true);
 
@@ -62,7 +74,7 @@ const StartAnalysisScreen = ({
         console.error("Error starting analysis:", error);
         setIsLoading(false);
       });
-  }, []);
+  }, [link]);
 
   return (
     <div className="w-full h-full flex flex-col justify-center items-center">
