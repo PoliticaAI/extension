@@ -4,13 +4,16 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 
 import { Tab, Tabs, Typography, IconButton } from "@mui/material";
 
+import InfoIcon from "@mui/icons-material/Info";
 import FactCheckIcon from "@mui/icons-material/FactCheck";
 import ArticleIcon from "@mui/icons-material/Article";
 import PlagiarismIcon from "@mui/icons-material/Plagiarism";
+
 import BiasTabPanel from "./BiasTabPanel";
 import SimilarArticleTabPanel from "./SimilarArticleTabPanel";
 import FallaciesTabPanel from "./FallaciesTabPanel";
 import ReplayIcon from "@mui/icons-material/Replay";
+import InfoTabPanel from "./InfoTabPanel";
 
 const MainScreen = ({ analysis }: { analysis: ArticleAnalysis | null }) => {
   const navigate = useNavigate();
@@ -54,30 +57,40 @@ const MainScreen = ({ analysis }: { analysis: ArticleAnalysis | null }) => {
           </IconButton>
         </div>
 
-        <Tabs value={tab} onChange={(_e, newTab) => setTab(newTab)}>
+        <Tabs
+          value={tab}
+          onChange={(_e, newTab) => setTab(newTab)}
+          variant="scrollable"
+        >
+          <Tab
+            icon={<InfoIcon />}
+            label={<Typography className="text-xs">Info</Typography>}
+            className="w-24 mb-2"
+          />
           <Tab
             icon={<FactCheckIcon />}
             label={<Typography className="text-xs">Bias</Typography>}
-            className="grow mb-2"
+            className="w-24 mb-2"
           />
           <Tab
             icon={<ArticleIcon />}
             label={
               <Typography className="text-xs">Similar Articles</Typography>
             }
-            className="grow mb-2"
+            className="w-36 mb-2"
           />
           <Tab
             icon={<PlagiarismIcon />}
             label={<Typography className="text-xs">Fallacies</Typography>}
-            className="grow mb-2"
+            className="w-24 mb-2"
           />
         </Tabs>
 
         <div className="h-full overflow-auto p-1">
-          {tab === 0 && <BiasTabPanel analysis={analysis} />}
-          {tab === 1 && <SimilarArticleTabPanel analysis={analysis} />}
-          {tab === 2 && <FallaciesTabPanel analysis={analysis} />}
+          {tab === 0 && <InfoTabPanel analysis={analysis} />}
+          {tab === 1 && <BiasTabPanel analysis={analysis} />}
+          {tab === 2 && <SimilarArticleTabPanel analysis={analysis} />}
+          {tab === 3 && <FallaciesTabPanel analysis={analysis} />}
         </div>
       </div>
     )
