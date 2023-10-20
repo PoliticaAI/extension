@@ -33,7 +33,7 @@ const Tag = ({
 const InfoTabPanel = ({ analysis }: { analysis: ArticleAnalysis }) => {
   return (
     <div className="p-4">
-      <Typography className="font-bold text-lg mb-4">
+      <Typography className="font-bold text-xl mb-4">
         {analysis.gpt_response.title}
       </Typography>
 

@@ -61,28 +61,29 @@ const MainScreen = ({ analysis }: { analysis: ArticleAnalysis | null }) => {
           value={tab}
           onChange={(_e, newTab) => setTab(newTab)}
           variant="scrollable"
+          className="flex"
         >
           <Tab
             icon={<InfoIcon />}
             label={<Typography className="text-xs">Info</Typography>}
-            className="w-24 mb-2"
+            className="w-24 mb-2 grow"
           />
           <Tab
             icon={<FactCheckIcon />}
             label={<Typography className="text-xs">Bias</Typography>}
-            className="w-24 mb-2"
+            className="w-24 mb-2 grow"
           />
           <Tab
             icon={<ArticleIcon />}
             label={
               <Typography className="text-xs">Similar Articles</Typography>
             }
-            className="w-36 mb-2"
+            className="w-36 mb-2 grow"
           />
           <Tab
             icon={<PlagiarismIcon />}
             label={<Typography className="text-xs">Fallacies</Typography>}
-            className="w-24 mb-2"
+            className="w-24 mb-2 grow"
           />
         </Tabs>
 
