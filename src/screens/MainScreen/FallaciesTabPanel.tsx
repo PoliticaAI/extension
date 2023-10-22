@@ -14,14 +14,14 @@ const FallaciesTabPanel = ({ analysis }: { analysis: ArticleAnalysis }) => {
         Logical Fallacies
       </Typography>
 
-      {...Object.entries(analysis.gpt_response.fallacies).map(
-        ([summary, desc]) => (
+      {...analysis.gpt_response.fallacies.map(
+        ({bias, explanation}, idx) => (
           <Accordion className="mb-4">
             <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-              <Typography>{summary}</Typography>
+              <Typography>Fallacy {idx + 1}: {bias}</Typography>
             </AccordionSummary>
             <AccordionDetails className="border-0 border-t-[1px] border-solid border-slate-500">
-              <Typography>{desc}</Typography>
+              <Typography>{explanation}</Typography>
             </AccordionDetails>
           </Accordion>
         )

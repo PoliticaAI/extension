@@ -34,33 +34,27 @@ const InfoTabPanel = ({ analysis }: { analysis: ArticleAnalysis }) => {
   return (
     <div className="p-4">
       <Typography className="font-bold text-xl mb-4">
-        {analysis.gpt_response.title}
+        {analysis.title}
       </Typography>
 
       <div className="flex flex-row space-x-2 mb-6">
         <Tag
           icon={LockIcon}
-          text="Factuality: High"
-          tooltip="Based on historical reporting by this source."
+          text={`Reliability: ${analysis.historical.reliability}`}
+          tooltip="Reliability ratings are produced by Ad Fontes Media on a scale of 0 to 50, with 50 being very high reliability and 0 being almost no reliability."
           color="bg-blue-500"
         />
 
         <Tag
           icon={BalanceIcon}
-          text="Bias: Low"
-          tooltip="Based on historical reporting by this source."
+          text={`Bias: ${analysis.historical.bias}`}
+          tooltip="Bias ratings are produced by Ad Fontes Media on a scale of -42 to 42, with -42 being left-leaning and 42 being right-leaning."
           color="bg-purple-500"
         />
       </div>
 
       <Typography>
-        Summary. I am summarizing here!Lorem ipsum dolor sit amet, consectetur
-        adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-        laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-        in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa
-        qui officia deserunt mollit anim id est laborum.
+        {analysis.gpt_response.summary}
       </Typography>
     </div>
   );

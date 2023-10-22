@@ -93,7 +93,7 @@ const StartAnalysisScreen = ({
       </Typography>
       <CircularProgress className="mb-6" />
       <Typography className="text-sm text-slate-600">
-        {progressData.status} ({progressData.progress}/4)
+        {progressData.status} ({progressData.progress}/5)
       </Typography>
     </div>
   );

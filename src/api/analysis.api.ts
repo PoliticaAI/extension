@@ -1,6 +1,7 @@
-const API_URL = "http://localhost:5000/";
+const API_URL = "http://localhost:5555/";
 
 export interface ArticleAnalysis {
+  title: string;
   ddg_response: {
     href: string;
     thumb: string;
@@ -8,11 +9,14 @@ export interface ArticleAnalysis {
     desc: string;
   }[];
   gpt_response: {
-    fallacies: Record<string, string>;
-    ranking: string[];
-    reasons: Record<string, string>;
-    title: string;
-    top_image: string;
+    rating: string;
+    fallacies: { bias: string; explanation: string }[];
+    reasons: { reason: string; explanation: string }[];
+    summary: string;
+  };
+  historical: {
+    bias: number;
+    reliability: number;
   };
 }
 
