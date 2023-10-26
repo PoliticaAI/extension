@@ -1,4 +1,4 @@
-export const API_URL = "http://localhost:5555/";
+export const API_URL = "http://167.172.197.78:5555/";
 
 export interface ArticleAnalysis {
   title: string;

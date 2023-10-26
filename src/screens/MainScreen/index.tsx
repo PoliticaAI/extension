@@ -15,6 +15,8 @@ import FallaciesTabPanel from "./FallaciesTabPanel";
 import ReplayIcon from "@mui/icons-material/Replay";
 import InfoTabPanel from "./InfoTabPanel";
 
+import LogoImage from "/logo.svg";
+
 const MainScreen = ({ analysis }: { analysis: ArticleAnalysis | null }) => {
   const navigate = useNavigate();
   const [tab, setTab] = useState(0);
@@ -40,15 +42,8 @@ const MainScreen = ({ analysis }: { analysis: ArticleAnalysis | null }) => {
   return (
     analysis && (
       <div className="flex h-full flex-col">
-        <div className="px-3 py-1.5 bg-slate-200 flex items-center">
-          <Typography
-            variant="h5"
-            fontWeight={400}
-            component="div"
-            className="text-blue-600 flex-1"
-          >
-            Political Spectrum
-          </Typography>
+        <div className="px-3 py-1 bg-slate-200 flex items-center ">
+          <img src={LogoImage} className="h-12 mr-auto" />
 
           <IconButton
             onClick={() => navigate(`/start?href=${searchParams.get("href")}`)}
