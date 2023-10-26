@@ -19,7 +19,7 @@ const MainScreen = ({ analysis }: { analysis: ArticleAnalysis | null }) => {
   const navigate = useNavigate();
   const [tab, setTab] = useState(0);
 
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams, _setSearchParams] = useSearchParams();
 
   useEffect(() => {
     const params = new URLSearchParams(

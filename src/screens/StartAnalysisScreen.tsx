@@ -20,14 +20,15 @@ const StartAnalysisScreen = ({
     progress: number;
   }>({ status: "Initializing", progress: 0 });
 
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams, _setSearchParams] = useSearchParams();
   const [link, setLink] = useState<null | string>(null);
 
   useEffect(() => {
     (async () => {
       setLink(
         searchParams.get("href") ||
-          (await chrome.tabs.query({ active: true, lastFocusedWindow: true }))[0].url
+          (await chrome.tabs.query({ active: true, lastFocusedWindow: true }))[0].url ||
+          window.location.href
       );
     })();
   }, [searchParams]);

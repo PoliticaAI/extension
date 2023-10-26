@@ -1,8 +1,10 @@
-import { TextField, Typography, Button } from "@mui/material";
 import { useState } from "react";
-import isLink from "../util/isLink";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
+import { TextField, Typography, Button } from "@mui/material";
 import ErrorIcon from "@mui/icons-material/Error";
+
+import isLink from "../util/isLink";
 
 const AskAnalysisScreen = () => {
   const [link, setLink] = useState<string>("");

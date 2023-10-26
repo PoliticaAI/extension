@@ -1,11 +1,13 @@
-import API_URL from "../config";
+import { API_URL } from "./analysis.api";
 
 export interface HistoricalRatings {
   factuality: number;
   political: number;
 }
 
-const getHistoricalRatings = async (article: URL): Promise<HistoricalRatings> => {
+const getHistoricalRatings = async (
+  article: URL
+): Promise<HistoricalRatings> => {
   const url =
     API_URL +
     "historical_ratings?" +
@@ -13,7 +15,7 @@ const getHistoricalRatings = async (article: URL): Promise<HistoricalRatings> =>
 
   const response = await fetch(url);
   const json = await response.json();
-  
+
   return json;
 };
 
