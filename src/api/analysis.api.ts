@@ -1,4 +1,4 @@
-export const API_URL = "http://api.politica-ai.tech/";
+export const API_URL = "https://api.politica-ai.tech/";
 
 export interface ArticleAnalysis {
   title: string;
