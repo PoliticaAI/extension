@@ -1,4 +1,5 @@
 export const API_URL = "https://api.politica-ai.tech/";
+// export const API_URL = "http://localhost:5555/";
 
 export interface ArticleAnalysis {
   title: string;

@@ -31,6 +31,34 @@ const Tag = ({
 };
 
 const InfoTabPanel = ({ analysis }: { analysis: ArticleAnalysis }) => {
+  let reliabilityColor = "bg-gray-500";
+  let reliabilityText = "Unknown";
+
+  if (analysis.historical.reliability > 40) {
+    reliabilityColor = "bg-green-500";
+    reliabilityText = "Reliability scores for articles are on a scale of 0-64. Scores above 40 are generally good.";    
+  } else if (analysis.historical.reliability > 24) {
+    reliabilityColor = "bg-yellow-600";
+    reliabilityText = "Reliability scores for articles are on a scale of 0-64. Scores between 24-40 indicate a range of possibilities, with some sources falling there because they are heavy in opinion and analysis, and some because they have a high variation in reliability between articles.";    
+  } else {
+    reliabilityColor = "bg-red-500";
+    reliabilityText = "Reliability scores for articles are on a scale of 0-64. Scores above 40 are generally good. Scores below 24 are generally problematic.";    
+  }
+
+  let biasColor = "bg-gray-500";
+  let biasText = "Unknown";
+
+  if (analysis.historical.bias > 20) {
+    biasColor = "bg-red-500";
+    biasText = "Bias ratings are on a scale of -42 to 42, with -42 being left-leaning and 42 being right-leaning. Scores above 20 are generally right-leaning.";    
+  } else if (analysis.historical.bias < -20) {
+    biasColor = "bg-blue-500";
+    biasText = "Bias ratings are on a scale of -42 to 42, with -42 being left-leaning and 42 being right-leaning. Scores below -20 are generally left-leaning.";    
+  } else {
+    biasColor = "bg-gray-500";
+    biasText = "Bias ratings are on a scale of -42 to 42, with -42 being left-leaning and 42 being right-leaning. Scores between -20 and 20 are generally centrist.";    
+  }
+
   return (
     <div className="p-4">
       <Typography className="font-bold text-xl mb-4">
@@ -40,16 +68,16 @@ const InfoTabPanel = ({ analysis }: { analysis: ArticleAnalysis }) => {
       <div className="flex flex-row space-x-2 mb-6">
         <Tag
           icon={LockIcon}
-          text={`Reliability: ${analysis.historical.reliability}`}
-          tooltip="Reliability ratings are produced by Ad Fontes Media on a scale of 0 to 50, with 50 being very high reliability and 0 being almost no reliability."
-          color="bg-blue-500"
+          text={`Source Reliability: ${analysis.historical.reliability}`}
+          tooltip={reliabilityText + " Source: Ad Fontes Media."}
+          color={reliabilityColor}
         />
 
         <Tag
           icon={BalanceIcon}
-          text={`Bias: ${analysis.historical.bias}`}
-          tooltip="Bias ratings are produced by Ad Fontes Media on a scale of -42 to 42, with -42 being left-leaning and 42 being right-leaning."
-          color="bg-purple-500"
+          text={`Source Bias: ${analysis.historical.bias}`}
+          tooltip={biasText + " Source: Ad Fontes Media."}
+          color={biasColor}
         />
       </div>
 
