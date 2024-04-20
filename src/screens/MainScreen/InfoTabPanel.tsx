@@ -31,32 +31,35 @@ const Tag = ({
 };
 
 const InfoTabPanel = ({ analysis }: { analysis: ArticleAnalysis }) => {
+  const normalizedReliability = ((analysis.historical.reliability / 64) * 10).toFixed(2);
+  const normalizedBias = ((analysis.historical.bias / 42) * 10).toFixed(2);
+
   let reliabilityColor = "bg-gray-500";
   let reliabilityText = "Unknown";
 
-  if (analysis.historical.reliability > 40) {
+  if (analysis.historical.reliability > 6.25) { // 40/64 * 10
     reliabilityColor = "bg-green-500";
-    reliabilityText = "Reliability scores for articles are on a scale of 0-64. Scores above 40 are generally good.";    
-  } else if (analysis.historical.reliability > 24) {
+    reliabilityText = "Reliability scores for articles are on a scale of 0-10. Scores above 6.25 are generally good.";    
+  } else if (analysis.historical.reliability > 3.75) { // 24/64 * 10
     reliabilityColor = "bg-yellow-600";
-    reliabilityText = "Reliability scores for articles are on a scale of 0-64. Scores between 24-40 indicate a range of possibilities, with some sources falling there because they are heavy in opinion and analysis, and some because they have a high variation in reliability between articles.";    
+    reliabilityText = "Reliability scores for articles are on a scale of 0-10. Scores between 3.75-6.25 indicate a range of possibilities, with some sources falling there because they are heavy in opinion and analysis, and some because they have a high variation in reliability between articles.";    
   } else {
     reliabilityColor = "bg-red-500";
-    reliabilityText = "Reliability scores for articles are on a scale of 0-64. Scores above 40 are generally good. Scores below 24 are generally problematic.";    
+    reliabilityText = "Reliability scores for articles are on a scale of 0-10. Scores above 6.25 are generally good. Scores below 3.75 are generally problematic.";    
   }
 
   let biasColor = "bg-gray-500";
   let biasText = "Unknown";
 
-  if (analysis.historical.bias > 20) {
+  if (analysis.historical.bias > 4.75) { // 20/42 * 10
     biasColor = "bg-red-500";
-    biasText = "Bias ratings are on a scale of -42 to 42, with -42 being left-leaning and 42 being right-leaning. Scores above 20 are generally right-leaning.";    
-  } else if (analysis.historical.bias < -20) {
+    biasText = "Bias ratings are on a scale of -10 to 10, with -42 being left-leaning and 42 being right-leaning. Scores above 4.75 are generally right-leaning.";    
+  } else if (analysis.historical.bias < -4.75) { // -20/42 * 10
     biasColor = "bg-blue-500";
-    biasText = "Bias ratings are on a scale of -42 to 42, with -42 being left-leaning and 42 being right-leaning. Scores below -20 are generally left-leaning.";    
+    biasText = "Bias ratings are on a scale of -10 to 10, with -42 being left-leaning and 42 being right-leaning. Scores below -4.75 are generally left-leaning.";    
   } else {
     biasColor = "bg-gray-500";
-    biasText = "Bias ratings are on a scale of -42 to 42, with -42 being left-leaning and 42 being right-leaning. Scores between -20 and 20 are generally centrist.";    
+    biasText = "Bias ratings are on a scale of -10 to 10, with -42 being left-leaning and 42 being right-leaning. Scores between -4.75 and 4.75 are generally centrist.";    
   }
 
   return (
@@ -68,14 +71,14 @@ const InfoTabPanel = ({ analysis }: { analysis: ArticleAnalysis }) => {
       <div className="flex flex-row space-x-2 mb-6">
         <Tag
           icon={LockIcon}
-          text={`Source Reliability: ${analysis.historical.reliability}`}
+          text={`Source Reliability: ${normalizedReliability}`}
           tooltip={reliabilityText + " Source: Ad Fontes Media."}
           color={reliabilityColor}
         />
 
         <Tag
           icon={BalanceIcon}
-          text={`Source Bias: ${analysis.historical.bias}`}
+          text={`Source Bias: ${normalizedBias}`}
           tooltip={biasText + " Source: Ad Fontes Media."}
           color={biasColor}
         />

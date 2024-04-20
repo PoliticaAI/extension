@@ -2,10 +2,12 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
+  Alert,
   Typography,
 } from "@mui/material";
 import { ArticleAnalysis } from "../../api/analysis.api";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import CheckIcon from '@mui/icons-material/Check';
 
 const FallaciesTabPanel = ({ analysis }: { analysis: ArticleAnalysis }) => {
   return (
@@ -14,7 +16,9 @@ const FallaciesTabPanel = ({ analysis }: { analysis: ArticleAnalysis }) => {
         Logical Fallacies
       </Typography>
 
-      {...analysis.gpt_response.fallacies.map(
+      {analysis.gpt_response.fallacies.length === 0 ? (
+
+      analysis.gpt_response.fallacies.map(
         ({bias, explanation}, idx) => (
           <Accordion className="mb-4">
             <AccordionSummary expandIcon={<ExpandMoreIcon />}>
@@ -25,7 +29,12 @@ const FallaciesTabPanel = ({ analysis }: { analysis: ArticleAnalysis }) => {
             </AccordionDetails>
           </Accordion>
         )
+      )) : (
+        <Alert icon={<CheckIcon fontSize="inherit" />} severity="info">
+          No fallacies found in this article.
+        </Alert>
       )}
+
     </div>
   );
 };
