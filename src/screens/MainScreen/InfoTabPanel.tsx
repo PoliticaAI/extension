@@ -53,13 +53,13 @@ const InfoTabPanel = ({ analysis }: { analysis: ArticleAnalysis }) => {
 
   if (analysis.historical.bias > 4.75) { // 20/42 * 10
     biasColor = "bg-red-500";
-    biasText = "Bias ratings are on a scale of -10 to 10, with -42 being left-leaning and 42 being right-leaning. Scores above 4.75 are generally right-leaning.";    
+    biasText = "Bias ratings are on a scale of -10 to 10, with -10 being left-leaning and 10 being right-leaning. Scores above 4.75 are generally right-leaning.";    
   } else if (analysis.historical.bias < -4.75) { // -20/42 * 10
     biasColor = "bg-blue-500";
-    biasText = "Bias ratings are on a scale of -10 to 10, with -42 being left-leaning and 42 being right-leaning. Scores below -4.75 are generally left-leaning.";    
+    biasText = "Bias ratings are on a scale of -10 to 10, with -10 being left-leaning and 10 being right-leaning. Scores below -4.75 are generally left-leaning.";    
   } else {
     biasColor = "bg-gray-500";
-    biasText = "Bias ratings are on a scale of -10 to 10, with -42 being left-leaning and 42 being right-leaning. Scores between -4.75 and 4.75 are generally centrist.";    
+    biasText = "Bias ratings are on a scale of -10 to 10, with -10 being left-leaning and 10 being right-leaning. Scores between -4.75 and 4.75 are generally centrist.";    
   }
 
   return (
